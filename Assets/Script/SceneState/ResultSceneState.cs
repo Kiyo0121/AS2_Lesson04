@@ -1,0 +1,27 @@
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+public class ResultSceneState : ISceneState
+{
+    private GameManager _gameManager;
+ 
+    public void EnterState()
+    {
+        Debug.Log($"{GetType().Name}が始まります");
+
+        _gameManager = GameObject.FindAnyObjectByType<GameManager>();
+    }
+
+    public void ExecuteState()
+    {
+        if(Mouse.current.leftButton.wasPressedThisFrame)
+        {
+            _gameManager.ChangeSceneState(new TitleSceneState());
+        }
+    }
+
+    public void ExitState()
+    {
+        Debug.Log($"{GetType().Name}が終わります");
+    }
+}
